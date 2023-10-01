@@ -1,0 +1,217 @@
+#2750
+
+a = int(input())
+L=[]
+for i in range(a):
+    L.append(int(input()))
+L=list(set(L))
+L.sort()
+for i in L:
+    print(i)
+
+
+
+########### 왜 안됨????????????
+L=[]
+n=1
+while True:
+    try:
+        a=input()
+        if a:
+            L.append(int(a))
+        else:
+            raise EOFError
+    except EOFError:
+        break
+# 답안지
+L=[]
+for i in range(5):
+    a=int(input())
+    L.append(a)
+L.sort()
+
+su_m=0
+for i in L:
+    su_m+=i
+    
+aver=su_m//5
+print(aver)
+print(L[2])
+
+#25305번 커트라인
+count, grad =map(int,input().split())
+L= list(map(int,input().split()))
+L.sort()
+L.reverse()
+print(L[grad-1])
+
+
+
+### 2751번 오름차순
+#### 기존과 다른 점 값의 개수가 1,000,000까지 된다.
+input()을 쓰면 안된다.
+import sys
+n= int(input())
+num=[]
+for _ in range(n):
+    num.append(int(sys.stdin.readline()))
+num.sort()
+for i in num:
+    print(i)
+
+
+### 10989번의 point
+## 메모리 제한
+############ list가 수의 모임이 아닌 순서의 모임으로 나타낸 거임.
+import sys
+n= int(sys.stdin.readline())
+num=[0]*10001
+for i in range(n):
+    a= int(sys.stdin.readline())
+    num[a]+=1
+for i in range(10001):
+    if i ==0:
+        pass
+    else:
+        for j in range(num[i]):
+            print(i)
+
+
+#1427 소트인사이드
+a= input()
+L=[0]*10
+s=""
+for i in a:
+    b=int(i)
+    L[b]+=1
+for j in range(-1,-11,-1):
+    if L[j]!=0:
+        s+=str(j+10)*L[j]
+print(s)
+# 리스트의 자리가 수이고 그 안의 수는 개수이다.
+
+
+#11650
+################
+좌표 정렬하기
+---> sort에 대해 알아보자
+
+
+import sys
+input = sys.stdin.readline
+n= int(input())
+array=[]
+for i in range(n):
+    a= list(map(int,input().split()))
+    array.append(a)
+ #s_array= sorted(array)
+array.sort()
+for i in range(n):
+#    print(s_array[i][0], s_array[i][1])
+    print(array[i][0],array[i][1])
+
+
+#11651
+좌표 y의 오름차순
+list() 대신 [a,b]를 대입하면 된다.
+
+import sys
+input = sys.stdin.readline
+n= int(input())
+array=[]
+for i in range(n):
+    [a,b]= map(int,input().split())
+    array.append([b,a])
+array.sort()
+for i in range(n):
+    print( array[i][1],array[i][0])
+
+
+##################1181
+길이에 따른 단어 정렬
+
+# 문제는 추어지는 글자의 개수도 sort의 원료가 되어야 한다.
+# 글자의 길이를 list에 추가한 형태를 list에 넣어준다.
+
+# 조건 2 중복은 제거한다. 
+# 조건 2를 충족하지 못하면 "출력초과"가 뜬다.
+
+n= int(input())
+len_cha=[]
+
+for i in range(n):
+    a= input()
+    len_cha.append(a)
+len_cha=list(set(len_cha))
+result=[]
+for i in len_cha:
+    result.append([len(i),i])
+result.sort()
+for k,j in result:
+    print(j)
+
+
+
+
+#10814 나이순 정렬
+순서는 나이로만을 요소로 사용하는 것이다.
+순서의 요소는 오직 나이만 하는 것이다.
+
+import sys
+a= int(input())
+L=[]
+old_list=[]
+for i in range(a):
+    [old,name]=sys.stdin.readline().split(" ")
+    old=int(old)
+    old_list.append(old)
+    L.append([old,name])
+old_list=list(set(old_list))
+old_list.sort()
+for j in old_list:
+    for i in L:
+        if j==i[0]:
+            name=i[1].strip("\n")
+            print(j, name)
+
+
+#####################################18870########
+시간초과가 문제였다.
+
+
+import sys
+a=int(sys.stdin.readline())       
+#sys.stdin.readline()   # "~\n"의 형태이다.
+# 같은 종류는 1로 취급한다.
+# set,> sort,> list, 자리의 값을 토해내면 될 듯
+result=""
+nums= list(map(int,sys.stdin.readline().split())) 
+#split을 사용하지 않으면 "\n"이 나올 것이다.
+re_nums=sorted(list(set(nums)))
+# 정렬의 꽃은 sort의 힘을 아는 것이다.
+dic={re_nums[i]:i for i in range(len(re_nums))}
+for i in nums:
+    print(dic[i], end=" ")
+
+
+
+#########dict 사용ㅇ
+dic={re_nums[i]:i for i in range(len(re_nums))}
+for i in nums:
+    print(dic[i], end=" ")
+
+#####1번 시간초과
+for i in nums:
+    print(re_nums.index(i), end=" ")
+
+
+#####2번 시간초과
+re_nums=list(set(nums))
+re_nums.sort()
+# 정렬의 꽃은 sort의 힘을 아는 것이다.
+
+for i in range(a):
+    for j in range(len(re_nums)):
+        if nums[i]== re_nums[j]:
+            result+=f"{j} "
+print(result)

@@ -1,0 +1,126 @@
+github
+U : 문법에 오류가 없이 저장이 되어 있지 않음
+M : 문법에 오류가 있고, 저장되어 있지 않다.
+
+약수와 배수
+#11653 소인수분해
+조건문에서 and or 문제
+위와 아래의 차이에서 알 수 있는 것
+if 내에 and와 같은 것은 오류가 생길 수 있다는 문제이다.
+아래에선 분명 False가 나오는데 True로 판단하는 오류가 발생
+하는 경우가 있다. 
+
+
+L=[]
+######### L==False 는 False로 나옴 , L==True도 False임
+########### not (L) 이 True로 나옴
+
+
+
+input vs sys
+"""
+import sys
+sys.stdin.readline()
+"""
+은 input과 비슷하지만 다르다
+차이: sys는 개행문자를 포함한채로 return하지만
+input()은 삭제하는 과정을 거치고 진행한다.
+
+import sys
+a= sys.stdin.readline()# "~\n"의 형태이다.
+print(a)
+
+이런 형태면 가능하다. 
+cards = list(map(int, sys.stdin.readline().split()))
+
+n,m = = sys.stdin.readline().split() 는 너무 많은 값을 받기에 Error
+n,m= list(map(int,sys.stdin.readline().split())) 이건 가능하네 ㄷㄷ
+n= int(sys.stdin.readline()) 가능하다
+
+
+
+list.append()
+append는 새로운 리스트를 만들면서 공간을 차지하게 된다.
+그래서 해결안은 기존의 list를 최대한 이용하며 하는 것이다.
+
+sort는 list 안의 list에 대해 알아볼 수 있다.
+list의 처음이 구분의 기준 
+다음은 list의 다음 부분이 구분의 기준이다.
+
+
+------------------정렬에서 나온 개념-------------
+len_cha=[[],[],[]]          vs         [[]]*10
+특이한 사항이 나올 때는 
+
+append() 에서 발생함. 
+1.처음의 경우에는 인덱스를 한다면 하나에만 나타난다.
+2. 두번째에는 인덱스를 해도 모든 안의 list에 append가 된다.
+
+
+str에서 sys를 할 때에 "\n"을 rstrip()으로 지워준다.
+a=sys.stdin.readline().rstrip()
+
+a,b = map(int,sys.stdin.readline().strip().split())
+# list 안 넣어도 된다.
+
+
+.keys()는 시간초과의 원인이 된다.
+
+# 서로 다른 것을 고르려는 것은 set
+
+
+
+######유클리드 호재법
+    aa,bb=a,b
+    while bb!=0:
+        r= aa%bb
+        aa,bb=bb,r
+    #마지막에 나머지가 0이 될 때의 bb의 값이 최대 공약수
+
+
+
+소수
+########## 소수 구하기 알고리즘
+for j in range(2,k+1):
+    if i%j==0:
+        break
+else:
+    print(i)
+############ 원본
+import sys
+m,n= map(int, sys.stdin.readline().strip().split())
+for i in range(m,n+1):
+    if i==1:                      ######### 1은 소수가 아니기에
+            pass
+    else:
+        k=int(i**(1/2))           ############ 루트의 값 내에서 약수가 없다면 그것은 소수이다.
+        if k==1:
+            print(i)
+        elif k==2:
+            if i%2==0:
+                pass
+            else:
+                print(i)
+        else:
+            for j in range(2,k+1):
+                if i%j==0:
+                    break           반복문을 아예 끝내버린다.
+            else:                   반복문의 구간을 다 하게 된다면 else로 가진다. 
+                print(i)
+                ############## # print()아래에 break을 넣으니 바깥의 반복이 끝이 났다.
+
+# for 문에서
+# 다음 문구는 반복이 완료되고 
+# 이루어지는 것이기에 else없이 다음 문장에 넣어도 된다.
+
+
+
+Method
+
+str.replace("old","new")
+현 str에 있는 every "old" convert to "new"
+ex: "oldoldoldoldW"--> "newnewnewnewW"
+
+str.find("old")
+old의 위치를 반환한다.
+안에 "old"가 없다면 -1을 반환한다.

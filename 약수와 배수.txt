@@ -1,0 +1,147 @@
+#5086
+while True:
+   a= input()
+   if a=="0 0":
+      break
+   else:
+      a,b= map(int,a.split())
+      if a>b and a%b==0 :
+         print("multiple")
+      elif a<b and b%a==0:
+         print("factor") 
+      else:
+         print("neither")        
+
+#2501 약수 구하기
+틀린회수 1회
+이유 index에서 범위를 b로 지정했다.
+a, b =map(int,input().split())
+result=[]
+for i in range(1, a+1):
+    if a%i==0:
+        result.append(i)
+try:
+   result= result[b-1]
+except IndexError:
+    result=0
+print(result)
+
+
+
+#9506 약수들의 합
+while True:
+   L=[]
+   a= int(input())
+   if a==(-1):
+      break
+   else:
+      for i in range(1, a):
+         if a%i==0:
+            L.append(i)
+         else:
+            pass
+      result=0
+      for i in L:
+         result+=i
+      if a!=result:
+         print(f"{a} is NOT perfect.")
+      else:
+         print(f"{a} = ",end="")
+         for i in L:
+            if i== L[len(L)-1]:
+               print(f"{i}",end="\n")
+            else:
+               print(f"{i} + ",end="")
+
+#1978
+k= int(input())
+L= list(map(int, input().split()))#input에 ()가 없으니 
+#attribute Error가 나옴
+result=0
+for i in L:
+    result_l=[]
+    if i!=1:
+        for j in range(1,i):
+          if i%j==0:
+             result_l.append(j)
+    if len(result_l)==1:# 위의 범위를 만지거나 결과에 들어가는
+                        #리스트의 길이의 기준을 바꾼다
+        result+=1
+print(result)
+
+
+
+######################################
+2581
+a_min=int(input())
+a_max= int(input())
+result=[]
+sum_result=0
+for i in range(a_min,a_max+1):
+    result_L=[]
+    if i!=1:
+        if i%2:
+            pass
+        elif i%3:
+            pass
+        elif i%5:
+            pass
+        elif i%7:
+            pass
+        elif i%11:
+            pass
+        for j in range(1,i):
+            if i%j==0:
+                result_L.append(j)
+    if len(result_L)==1:
+        result.append(i)
+if result:        
+    for i in result:
+        sum_result+=i
+    print(sum_result)
+    print(result[0])
+else:
+    print(-1)
+#################key point
+#나는 여기에서 나머지가 0이라는 것을 추가해서 시간을
+#줄이는 방향으로 생각했다.
+
+
+
+#11653
+########### 소인수분해
+n = int(input())
+
+if n == 1:
+    print('')
+
+# 2부터 하나씩 나눠보기
+for i in range(2, n+1):
+    if n % i == 0:
+    	#해당 숫자로 나눌 수 없을 때까지 나누기
+        while n % i == 0:
+            print(i)
+            n = n / i
+
+조건문에서 and or 문제
+위와 아래의 차이에서 알 수 있는 것
+if 내에 and와 같은 것은 오류가 생길 수 있다는 문제이다.
+아래에선 분명 False가 나오는데 True로 판단하는 오류가 발생
+하기 때문이다.
+
+
+L=[]
+n = int(input())
+for i in range(2, n+1):
+    while True:
+        if n%i==0:
+            if i%2==0 and i!=2:
+                break
+            elif i%3==0 and i!=3:
+                break
+            elif i%5==0 and i!=5:
+                break
+            else:
+                L.append(i)
+                n=n/i
+print(L)

@@ -1,0 +1,171 @@
+#10815 숫자카드
+# dict의 인덱스는 순서가 아닌 keyword로 하는 것이다.
+# "안에 존재하니?"가 궁금하다면 in을 사용해라.
+
+import sys
+a= int(sys.stdin.readline())
+b=list(map(int, sys.stdin.readline().split()))
+c=int(sys.stdin.readline())
+d= list(map(int, sys.stdin.readline().split()))
+dict_b={b[i]:1 for i in range(a)}
+
+for j in range(c):
+    if d[j] in dict_b:
+        print(1, end=" ")
+    else:
+        print(0,end=" ")
+
+
+
+import sys
+input= sys.stdin.readline          #######() 괄호시치
+a, b=map(int,input().split())      ########### \n 이 안나옴
+dic_b= {input():1 for i in range(a)}
+result=0
+for j in range(b):
+    d= input()                       #.strip("\n")
+    if  d in dic_b:
+        result+=1
+print(result)
+
+
+#7785 회사의 사람들 들어온 사람은??
+
+######틀림
+import sys
+a= int(sys.stdin.readline())#int(input())
+L=[]
+for i in range(a):
+    b,c = sys.stdin.readline().split()
+    if c=="enter":
+        L.append(b)# 그만큼의 시간이 생긴다. 
+                    # dict를 사용해준다.
+    elif c=="leave":
+        L.remove(b)
+L.sort()
+for i in range(-1,-len(L)-1,-1):
+    print(L[i])
+
+###########맞음
+------ append()대신에 dict에 대입하는 형식으로 했다.
+import sys
+n= int(sys.stdin.readline())
+temp=dict()
+for _ in range(n):
+    b,c=map(str,sys.stdin.readline().split())
+    if c== "enter":
+        temp[b]=1
+    elif c== "leave":
+        del temp[b]
+temp= sorted(temp.keys(), reverse=True)
+for i in temp:
+    print(i)
+
+#1620
+import sys
+n,m= map(int,sys.stdin.readline().split())
+#list(map(int,sys.stdin.readline().split()))
+poc_name=dict()
+for i in range( n):
+    #a= sys.stdin.readline()
+    #a=a.replace("\n","")
+    #a=a.lower()
+    #a=a[0].upper()+a[1:]
+    a=sys.stdin.readline().rstrip()
+    poc_name[a]=i+1
+    poc_name[i+1]=a
+
+for i in range(m):
+    b= sys.stdin.readline().rstrip()
+    #b=b.replace("\n","")
+    if b.isnumeric()==True:
+        
+        #b= int(b)
+        #poc_name_list= poc_name.keys()# 시간초과의 원인
+        #TypeError: 'dict_keys' object is not subscriptable
+        # 해결법 list(poc_name_list)를 추가해준다
+        #poc_name_list=list(poc_name_list)
+        print(poc_name[int(b)])
+    else:
+        print(poc_name[b])# key 에러인 이유 : 처음 대문자
+
+
+
+#10816
+## not in 
+## result.key() == tuple이다. 그래서 괄호안에 성분을 본 것
+import sys
+n= int(sys.stdin.readline())
+m= list(map(int,sys.stdin.readline().split()))
+result=dict()
+for i in m:
+    if i not in result.keys():# 지렸다. ㄷㄷㄷㄷㄷ
+        result[i]=1
+    else:
+        result[i]+=1    
+num=int(sys.stdin.readline())
+num_m= list(map(int,sys.stdin.readline().split()))
+for i in num_m:
+    if i not in result.keys():
+        print("0", end=" ")
+    else:
+        print(f"{result[i]}",end=" ")
+
+
+#1764
+import sys
+n,m= list(map(int, sys.stdin.readline().split()))
+name=dict()
+result=dict()
+for i in range(n):
+    a= sys.stdin.readline().rstrip()
+    name[a]=1
+for j in range(m):
+    a=sys.stdin.readline().rstrip()
+    if a not in name.keys():
+        name[a]=1
+    else:
+        result[a]=1 # apep
+print(len(result))
+
+
+result_name=sorted(result.keys())# alphabet sequence
+for i in result_name:
+    print(i)#result[i]는 그에 따른 value값이므로 1이 나온다.
+
+#1269 
+############ 집합에 대해 알아보는 시간이었습니다. ㅎㅎㅎ
+import sys
+num_a, num_b= list(map(int, sys.stdin.readline().split()))
+a= set(map(int,sys.stdin.readline().split()))
+b= set(map(int,sys.stdin.readline().split()))
+print(len(a-b)+len(b-a))
+
+####### 실패한 것
+# 이유 list로 하려 했기에
+import sys
+num_a, num_b= list(map(int, sys.stdin.readline().split()))
+a= list(map(int,sys.stdin.readline().split()))
+b= list(map(int,sys.stdin.readline().split()))
+result=len(a)+len(b)
+for i in a:
+    if i in b:
+        result-=2
+
+print(result)
+
+#11478
+#### str의 index와 sclicing의 범위에 대해 공부하는 시간
+# 서로 다른 것을 고르려는 것은 set
+a= input()
+result=set()
+for i in range(len(a)):# 간격
+    for j in range(len(a)):            # 시작점
+        if j+i<len(a):
+            if i==0:
+                result.add(a[j])
+            else:
+                num=a[j:i+j+1]
+                # slicing도 range와 같은 범위로 진행한다.
+                result.add(num)# slicint 은 :을 사용한다.
+print(len(result))

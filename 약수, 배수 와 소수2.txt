@@ -1,0 +1,246 @@
+
+##1934 최소공배수
+import sys
+n= int(sys.stdin.readline())
+for i in range(n):
+    a,b = map(int,sys.stdin.readline().strip().split())
+# list 안 넣어도 된다.
+# 서로 곱하고 공약수를 나누다.
+    #유클리드 호재법
+    aa,bb=a,b
+    while bb!=0:
+        r= aa%bb
+        aa,bb=bb,r
+    #마지막에 나머지가 0이 될 때의 bb의 값이 최대 공약수
+
+    print(a*b//aa)
+
+#13241
+import sys
+m,n =map(int,sys.stdin.readline().strip().split())
+mm,nn=m,n
+while nn!=0:
+    r=mm%nn
+    mm,nn=nn,r
+print(m*n//mm)
+
+
+#1735
+# 기약분수 최대 공약수를 분모와 분자에서 찾기
+# 1. 통분하기
+import sys
+a1,a2= map(int,sys.stdin.readline().strip().split())
+b1,b2= map(int,sys.stdin.readline().strip().split())
+r1= a1*b2+b1*a2
+r2= a2*b2
+rr1,rr2= r1,r2
+while rr2 !=0:
+    r=rr1%rr2
+    rr1,rr2= rr2,r
+print(r1//rr1, r2//rr1)
+
+
+------------------2485 가로수
+import sys
+n= int(sys.stdin.readline().strip())
+L=[0]*n
+for i in range(n):
+    a= int(sys.stdin.readline().strip())
+    L[i]=a
+L.sort()
+result=[0]*(n-1)
+for i in range(len(L)-1):
+    result[i]=L[i+1]-L[i]
+result.sort()# 간격을 나타냈다.
+count=0
+#나머지가 0인지 아닌지를 판단해야 한다.
+#real=[0]*((n-1)**2)# n의 개수 주의
+real=[0]*((n-1)**2)
+for i in range(n-1):
+    for j in range(n-1):
+        ii,jj= result[i],result[j]
+            # 공약수가 있을 때
+        while jj!=0:
+            r= ii%jj
+            ii,jj= jj,r
+        real[i*(n-1)+j]=ii
+real.sort()
+for i in result:
+    count+=i//real[0]-1
+print(count)
+----------------메모리 초과-----------
+---------- 밑이 해답 ---------
+import sys
+from math import gcd
+
+# 이미 심어져 있는 가로수 수 
+N = int(sys.stdin.readline())
+
+# 첫 가로수 위치 
+a = int(sys.stdin.readline())
+
+# 가로수들 사이의 값을 저장할 배열
+arr = []
+
+# 가로수들 사이의 간격 저장 
+for i in range(N-1):
+    num = int(sys.stdin.readline())
+    arr.append(num - a)
+    a = num
+
+# arr에 들어있는 모든 수들의 최대공약수 찾기
+g = arr[0]
+for j in range(1, len(arr)):
+    g = gcd(g, arr[j])
+
+# 둘 사이에 심을 가로수 개수: 간격 // 최대공약수 - 1
+result = 0
+for each in arr:
+    result += each // g - 1
+print(result)
+
+
+#13909 창문닫기, 같은 수에 따라 값이 변함
+용량초과
+import sys
+win_count= int(sys.stdin.readline())
+window= [1]*(win_count+1)
+window[0]=0
+for i in range(2,win_count+1):
+    count = win_count//i
+    for j in range(1,count+1):
+        if window[i*j]==0:
+            window[i*j]=1
+        else:
+            window[i*j]=0
+result= window.count(1)
+print(result)
+
+_________________
+#### 예시를 보면서 귀납적 추론을 위해 
+
+
+######### 1929
+import sys
+m,n= map(int, sys.stdin.readline().strip().split())
+for i in range(m,n+1):
+    if i==1:
+            pass
+    else:
+        k=int(i**(1/2))
+        if k==1:
+            print(i)
+        elif k==2:
+            if i%2==0:
+                pass
+            else:
+                print(i)
+        else:
+            for j in range(2,k+1):
+                if i%j==0:
+                    break
+            else:
+                print(i)
+# print()아래에 break을 넣으니 바깥의 반복이 끝이 났다.
+
+
+# 4134 다음 소수
+
+import sys
+import math-----------------------------math 모듈에 대해
+num= int(sys.stdin.readline())
+for i in range(num):
+    f= sys.stdin.readline()
+    f_2=int(f)
+    f_1= int(f)
+    while True:
+        if f_1 ==1 or f_1==0:
+            print(2)
+            break# 각 구간마다 break 넣어주기 !!!
+        else:
+            for i in range(2,int(math.sqrt(f_1))+1):
+                # 소수를 구하기 위해 범위의 수를 제곱근을 구함
+                if f_1%i==0:
+                    f_1+=1
+                    break
+            else:
+                print(f_1)
+                break
+
+
+#4948
+----------- 시간초과----------
+import sys
+import math
+while True:  
+    n= int(sys.stdin.readline())      
+    count=0
+    if n !=0:
+        if n==1:
+            print(1)   
+        else:
+            for i in range(n+1,2*n+1):
+                for j in range(1,int(i**(1/2))+1):
+                    # 범위에 들어가니?
+                    # 시작과 끝이 같다면 바로 완료로 처리
+                    if j!=1:
+                        if i%j==0:
+                            break
+                        else:
+                            pass
+                    else:
+                        continue
+                else:
+                    count+=1
+            else:
+                print(count)
+                #break 여기서의 break은 while을 막는 것
+    else:
+        break
+-------------- 시간 초과-----------------
+
+---실패---
+import sys
+def find_prime(i):
+    if i ==1:
+        return False
+    for j in range(2,int(i**(1/2)+1)):
+        if i%j==0:
+            return False
+    return True
+while True:
+    n= int(sys.stdin.readline())
+    if n==0:
+        break
+    L=[0]*(2*n+1)# 범위로 1을 더해준다.(index)
+    for i in range(n+1, 2*n+1):
+        # 함수를 이용해서 소수인 개수를 찾기
+        if find_prime(i):
+            L[i]=1
+        # 찾은 소수를 list에 넣어 바로 count하기
+    print(L.count(1))
+
+
+
+#4948
+L=[0]*246914
+L[2]=1
+L[3]=1
+for i in range(4,246914):
+    k=i**(0.5)
+    k=int(k)
+    for j in range(2,k+1):
+        if i%j==0:
+            break
+    else:
+        L[i]=1
+while True:
+    x= int(input())
+    sum=0
+    if x==0:
+        break
+    else:
+        for l in range(x+1,2*x+1):
+            if L[l]==1:
+                sum+=1
+        print(sum)

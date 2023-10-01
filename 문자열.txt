@@ -1,0 +1,191 @@
+문제 = 27866
+cha=input()
+cha_num=int(input())
+cha_num=cha_num-1
+print(cha[cha_num])
+
+주로 문제에선 변수선언에서 모든 계산을 끝내자
+
+
+cha_num = int(input())
+for i in cha_num:
+    s=""
+    cha = input()
+    s+=cha[0]+cha[-1]
+    print(s)
+# 런타임에러??
+
+cha_num = int(input())
+for i in range(cha_num):
+    cha = input()
+    print(cha[0]+cha[-1])
+# 틀린 이유 range를 안 썼다(int is not iterable)
+
+아스키코드는 ord이용한다.
+
+11720
+a= int(input())
+b= input()
+b_num=0
+for i in range(a):
+    b_num+=int(b[i])
+print(b_num)
+
+10875
+a= "abcdefghijklmnopqrstuvwxyz"
+s= input()
+k=""
+for i in a:
+    for j in range(len(s)):
+        if s[j]==i:
+            k+=(str(j)+" ")
+            break
+        elif i not in s:
+            k+="-1 "
+            break
+print(k)
+
+
+2675
+T= int(input())
+for i in range(T):
+    S=""
+    num, str = input().split(" ")
+    num= int(num)
+    for i in str:
+        S+=i*num
+    print(S)
+
+1152
+T= list(input().split(" "))
+print(len(T))
+
+
+
+********************
+1152
+T = input()
+if T==" ":
+    print(0)
+else:
+    T=T.split(" ")
+    if T[0]=="":
+        print(len(T)-1)
+    else:
+        print(len(T))
+틀림
+T= input()
+T=T.strip()
+T= list(T.split(" "))
+print(len(T))
+틀림
+T= input()
+T=T.strip()
+T= list(T.split()) # " "이 안들어가서 맞음
+print(len(T))
+
+
+#2908 상수
+s1,s2 = input().split(" ")
+L_s1= list(s1)
+L_s2= list(s2)
+L_s1.reverse()
+L_s2.reverse()
+r_s1=""
+r_s2=""
+for i in L_s1:
+    r_s1+=i
+for i in L_s2:
+    r_s2+=i
+N_s1=int(r_s1)
+N_s2=int(r_s2)
+if N_s1>N_s2:
+    print(N_s1)
+elif N_s2>N_s1:
+    print(N_s2)
+    # str은 reverse가 안된다. 
+    # str은 뽑아서 다른 곳에 넣으려면
+    #list로 만들기
+
+
+#5622// 다이얼
+# in을 사용해서 바로 문자열에 있는 것을 생각해봥ㅆ다.
+#1. 입력된 문자의 각각의 위치를 물어보는 것이었다.
+#2. 순서에 상관이 없기에 바로 in을 쓰자고 판단함.
+A= input()
+A3="ABC"
+A4="DEF"
+A5="GHI"
+A6="JKL"
+A7="MNO"
+A8="PQRS"
+A9="TUV"
+A10="WXYZ"
+time_num=0
+for i in A:
+    if i in A3:
+        time_num+=3
+    elif i in A4:
+        time_num+=4
+    elif i in A5:
+        time_num+=5
+    elif i in A6:
+        time_num+=6
+    elif i in A7:
+        time_num+=7
+    elif i in A8:
+        time_num+=8
+    elif i in A9:
+        time_num+=9
+    elif i in A10:
+        time_num+=10
+print(time_num)
+
+****************개념
+#11718
+# 순서가 정해지지 않았기에
+# 끝이 언제인지 알 수가 없다.
+result=""
+while True:
+    A=input()
+
+    result+=A+"\n"
+    #else:    공백을 입력했을 때만 가능한 것이다.
+        #break
+    
+    print(result)
+
+###EOFError는 input()에 아무것도 적혀지지 않을 때
+생기는 에러이다.
+while True:
+    try:
+        print(input())
+    except EOFError:
+        break
+
+#25083
+print("         ,r\'\"7")
+print("r`-_   ,\'  ,/")
+print(" \\. \". L_r\'")
+print("   `~\\/")
+print("      |")
+print("      |")
+
+
+
+# 입력변수
+# 빼주는 변수 = 결괏값
+king1,queen1,look2,bs2,kn2,pa8= map(int,input().split(" "))
+king1=1-king1
+queen1=1-queen1
+look2= 2-look2
+bs2=2-bs2
+kn2=2-kn2
+pa8=8-pa8
+king1=str(king1)
+queen1=str(queen1)
+look2= str(look2)
+bs2=str(bs2)
+kn2=str(kn2)
+pa8=str(pa8)
+print(king1+" "+queen1+" "+look2+" "+bs2+" "+kn2+" "+pa8)

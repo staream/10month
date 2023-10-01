@@ -1,0 +1,191 @@
+
+################### 답을 봤음
+# 2745 진법 변환
+num_seq ="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+num,bin = input().split()
+bin= int(bin)
+result=0
+for i in range(len(num)):
+    result+=num_seq.index(num[i])*bin**(len(num)-i-1)
+print(result) 
+
+######################################
+11005
+# 진법 변환 위와는 반대로 하기
+# 나누기의 몫과 나머지를 이용한다.
+a= "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+M,N = map(int,input().split())
+L=[]
+result=""
+while M!=0:
+        M_rest=M%N
+        L.append(M_rest)
+        M=M//N
+        
+L.reverse()
+for i in L:
+    result+=a[i]
+print(result)
+
+
+## 2720 잔돈구하기
+a= int(input())
+num_list=[25, 10, 5,1]
+for i in range(a):
+    result=[]
+    num= int(input())
+    for j in num_list:
+        result.append(num//j)
+        num=num%j
+    for k in result:
+        print(k,end=" ")
+    print("")
+
+#2903 중앙이동 알고리즘
+# 변에 계속 점이 늘어날 때 점의 개수
+k= int(input())
+a=2
+for i in range(k):
+    a+=a-1
+print(a*a)
+
+#2292 벌집문제
+# 단서 둘레의 길이가 6의 배수의 길만큼 늘어났다.
+# 더해지는 개수를 count하기로 했다.
+num = int(input())
+answer=1
+count=0
+while True:
+    if answer>=num:
+        print(count+1)# 1을 제외하고 생각했네 ㄷㄷㄷ
+        break# 없어서 위험할 뻔 했다.;;
+    else: 
+        count+=1
+        answer+=6*count
+
+
+################################ 범위가 성가신 문제이었음.
+#1193번 분수찾기
+a= int(input())
+n=0
+while True:
+   if n*(n+1)/2 <= a < (n+1)*(n+2)/2:
+      break
+   else:
+      n+=1
+      pass
+result_a= int(a-(n)*(n+1)/2)# TypeError: 'int' object is not callable
+# ()사이에 *를 넣지 않으면 list에서 부르는 것으로 생각한다.
+if n%2==1:
+   # 모가 빠지는 것이다.
+   if result_a !=0:
+      x=1
+      y=n+1
+      for i in range(result_a-1):
+        x+=1
+        y-=1
+   else:
+      x=1
+      y=n
+else:
+   if result_a!=0:
+       x=n+1
+       y=1
+       for i in range(result_a-1):
+           y+=1
+           x-=1
+   else:
+      x=n
+      y=1
+print(f"{x}/{y}")
+# 안된 이유는 while 바로 밑의 구간에서
+# a== n*(n+1)/2 인 경우를 생각하지 않았다.
+#해결법 if안에 result_a가 0이 되는 if를 하나 더 만들었다.
+
+
+
+
+V, S, L= map(int, input().split())
+result=0
+day=0
+while True:
+   result+=V
+   if result>=L:
+      day+=1
+      break
+   else:
+      result-=S
+      day+=1
+      pass
+print(day)
+
+
+################################### 디버그가 안 될 때 위에 input이 있을때
+V, S, L= map(int, input().split())
+day=0
+rest= L//(V-S)
+day+=rest
+나머지 = L%(V-S)
+while 나머지 <= V:
+   나머지+= (V-S)
+   day-= 1
+   rest-=1
+day+=2
+print(day)
+
+
+
+   day+=앞과_뒤+1
+   의문의_수= V//(V-S)
+   if L!=(앞과_뒤)*(V-S)+:
+      day-=의문의_수
+      day+=1
+   elif L==(앞과_뒤)*(V-S)+L%(V-S):
+      day-=의문의_수
+
+################################### 디버그가 안 될 때 위에 input이 있을때
+V, S, L= map(int, input().split())
+day=0
+앞과_뒤= L//(V-S)# 다음날 새벽까지 구함
+day+=앞과_뒤
+if 앞과_뒤!=0:
+   #나머지와 V의 크기를 비교해보기
+   # 나머지에 (V-S)를 더하면서 day는 1씩 더해준다.
+   # 1.더해진 나머지와 V가 같은 경우
+   # 2. 더해진 나머지가 V보다 큰경우
+
+   # 위의 방법 대신에 V를 (V-S)에 나누어 준다. 
+   # 나머지가 0일 때는 V/(V-S)를 day에 빼주고, 1을 더한다.
+   # 나머지가 있는 경우엔 나머지가 V보다 작을 때
+   # 나머지가 0일 때는 V/(V-S)를 day에 빼주고, 2를 더한다.
+   if L%(V-S)==0:
+      day-=V//(V-S)
+      day+=1
+   else:
+      if L< #나머지와 날짜와 V의 곱이 더 클때 
+         day-=V//(V-S)
+         day+=2
+      elif 
+         day-=V//(V-S)
+         day+=1
+elif 앞과_뒤==0:
+   day+=1
+print(day)
+#   L= (V-S)(앞과_뒤 + L%(V-S)
+#V가 나머지보다 훨씬 큰 경우
+
+####################### 해법
+V%(A-B)가 있냐 없냐?
+V//(A-B), A//(A-B)
+(V//(A-B))*(A-B)+A*(A//(A-B)) >V
+                              ==V
+
+#2869 나중에 재도전하기
+A,B,V= map(int,input().split())
+if V%(A-B)!=False and (V//(A-B))*(A-B)+A*(A//(A-B)) >V:
+      result= V//(A-B)-A//(A-B)+2
+elif  V%(A-B)!=False and (V//(A-B))*(A-B)+A*(A//(A-B)) >V and A%(A-B)==0:
+      result= V//(A-B)-A//(A-B)+2
+else:
+      result= V//(A-B)-A//(A-B)+1
+print(result)

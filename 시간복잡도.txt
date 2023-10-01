@@ -1,0 +1,44 @@
+#24262
+a= int(input())
+print(f"""{a*a}
+2""")
+
+1에서 n-1
+1 2 n
+2 3 n
+3 4 n
+4 5
+5 6
+6 7
+
+i는 1부터 n-1까지  n- (i+1) +1
+n*(n-1)/2
+
+#24265
+n=int(input())
+print((f"""{int(n*(n-1)/2)}
+2"""))
+
+
+i 1 n-2
+j i+1 n-i-1
+k n-j
+
+
+
+#24313
+# comment : 문제 이해가 어려웠다. ㅠㅠㅠ
+# 일차원 그래프의 기울기에 의한 대소비교 생각하기
+
+a1,a2= map(int,input().split())
+c= int(input())
+n0=int(input())
+F= a1*n0 + a2
+G= c*n0
+if a1<=c:
+    if F<=G:
+        print("1")
+    else:
+        print("0")
+else:
+    print("0")

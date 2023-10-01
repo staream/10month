@@ -1,0 +1,278 @@
+#2798 왜 리스트는 안되는데 대입은 될까?
+a, max= map(int, input().split())
+num=list(map(int,input().split()))
+num.sort()
+result=[]
+for i in range(a-2):
+    for j in range(i+1,a-1):
+            for k in range(j+1,a):
+                if num[i]+num[j]+num[k] > max:
+                    continue#break # continue 와 다른 것의 의미는?
+                else:
+                    result.append(num[i]+num[j]+num[k])
+
+
+#                    if result> num[i]+num[j]+num[k]:
+#                        pass
+#                    else:
+#                        result = num[i]+num[j]+num[k]
+result.sort()
+print(result[len(result)-1])
+#print(result)#result[len(result)-1])
+
+
+a, max= map(int, input().split())
+num=list(map(int,input().split()))
+num.sort()
+result=0
+for i in range(a):
+    for j in range(i+1,a):
+            for k in range(j+1,a):
+                sum_l = num[i]+num[j]+num[k]
+                if num[i]+num[j]+num[k] > max:
+                    continue#break # continue 와 다른 것의 의미는?
+                else:
+
+
+
+                    if result> num[i]+num[j]+num[k]:
+                        pass
+                    else:
+                        result = num[i]+num[j]+num[k] 
+#print(result[len(result)])
+print(result)#result[len(result)-1])
+
+
+
+#2231 분해합
+#코멘트 어렵다 
+# 여러 케이스를 생각해주어야 한다.
+
+#1차 시도
+a= input()
+
+# 각 자리마다 10개의 수를 가질 수 있다.
+# 각 자리가 9의 배수를 가지는 것이다.
+
+a_count=len(a)
+a_int=int(a)
+for i in range(a_int-a_count*9,a_int+1):
+    result=0
+    k=str(i)
+
+# 범위는 a_int가 9를 뺀 부분부터 a_int까지이다.
+
+    for j in range(a_count):
+        result+=int(k[j])
+    result+=i
+    if result==a_int:
+        print(i)
+        break
+    else:
+        pass
+# 여기서 IndexError가 나타났다. 그것을 피하기 위해선???
+
+a= input()
+a_count=len(a)
+a_int=int(a)
+if a_int-a_count*9>=0:
+    for i in range(a_int-a_count*9,a_int+1):
+        result=0
+        k=str(i)
+# 범위는 a_int가 9를 뺀 부분부터 a_int까지이다.
+        for j in k:
+            result+=int(j)
+        result+=i
+        if result==a_int:
+            print(i)
+            break
+        else:
+            pass
+    else:
+        print(0)
+elif a_int-a_count*9<0:
+    for i in range(0,a_int+1):
+        result=0
+        k=str(i)
+# 범위는 a_int가 9를 뺀 부분부터 a_int까지이다.
+        for j in k:
+            result+=int(j)
+        result+=i
+        if result==a_int:
+            print(i)
+            break
+        else:
+            pass
+    else:
+        print(0)
+# a_int-a_count*9<0 라는 경우를 생각해야 한다.
+#             result+=int(j) 에서 전에는 위의 범위를 수로 했지만
+# 그럴 필요가 없이 str을 index하는 형식으로 했다.
+
+
+#19532  수학은 비대면이다.
+a,b,c,d,e,f= map(int,input().split())
+for x in range(-999,1000):
+    for y in range(-999,1000):
+        if a*x+b*y==c and d*x+e*y==f:
+            print(f"{x} {y}")
+
+
+
+
+
+##########################체스판
+
+w, h =map(int,input().split())
+L=[]
+count=0
+for i in range(h):
+    a= list(input())
+    L.append(a)
+for _ in range((w-7)*(h-7)):
+    for i in range(h-7):
+        n=0
+        for j in range(w-7):
+            while n<8:
+                if  L[i][j]=="W":
+                    if L[i][j+1]=="B":
+                       n+=2
+                    else:
+                       n+=1
+                       L[i][j+1].replace("W","B")
+                       count+=1
+                elif L[i][j]=="B":
+                    if L[i][j+1]=="W":
+                       n+=2
+                    else:
+                       n+=1
+                       L[i][j+1].replace("B","W")
+                       count+=1       
+
+
+
+w, h =map(int,input().split())
+L=[]
+for i in range(h):
+    a= list(input())
+    L.append(a)
+for _ in range((w-7)*(h-7)):
+        for i in range(h-7):
+            for j in range(8):
+            # 리스트 안의 문자를 인덱스 할 수 있다.
+
+# 위에는 체스판임
+
+
+
+##############
+1018 체스판 다시 칠하기
+
+h,w= map(int,input().split())
+L=[]
+count_L=[]
+
+for i in range(h):
+    L.append(input())
+for i in range(h-7):
+    for j in range(w-7):
+        draw_1=0
+        draw_2=0
+# 자리의 이름을 이용한다.
+        for a in range(i,i+8):
+            for b in range(j,j+8):
+                if (a+b)%2==0:
+                    if L[a][b]!="B":
+                        draw_1+=1
+                    if L[a][b]!="W":
+                        draw_2+=1
+                else:
+                    if L[a][b]!="W":
+                        draw_1+=1
+                    if L[a][b]!="B":
+                        draw_2+=1
+                # if, if는 한번에 2가지 경우를 보기 위해 사용한 것이다.
+        count_L.append(draw_1)
+        count_L.append(draw_2)
+print(min(count_L))
+
+# 자리 이름 보기
+# 자리는 열과 행의 합이 홀수냐? 짝수냐로 나누었다.
+
+
+
+###############
+1436  영화감독 숌
+
+#######기존에 아이디어
+n = int(input())
+a= n//19
+b= n%19
+# 1~6 앞의 수 0~5
+# 7~16 뒤의 수 0~9
+# 17~19 앞의 수 7~9, 뒤의 수 6
+# 총 개수는 19개로 된다.
+# 나머지는 앞으로 나타나고 몫은 뒤에서 나온다.
+if 1<=b<=6:
+    result= f"{b-1}666"
+elif 6<b<=16:
+    result=f"666{b-7}"
+elif 17<=b<=18:
+    result=f"{b-10}666"
+else:
+    result=f"9666"
+
+if a:
+    print(f"{result}{a}")
+else:
+    print(f"{result}")
+
+
+# {A}666{B}
+
+a= int(input())
+n=0
+
+############개정된 답안지
+
+    #if 구간을 지나면 n은 1을 더해야만 한다. 
+    # 이과정에서 count밑에서 1을 더한다면 n을 print했을 때 
+    # 원래의 값보다 1이 더해진 상태가 된다. 
+    # 그래서 위에 놓았다.
+
+a= int(input())
+n=0
+count=0
+while count!=a:
+    n+=1 
+    if "666" not in str(n):
+        pass
+    else:
+        count+=1
+print(n)
+666을 문자 형태로 봐서 그것이 안에 있는지를 확인하며 
+1부터 계속 검사하는 것이다.
+not 규칙찾기 
+
+
+
+
+
+#2839
+####
+처음에는 여러 경우를 생각해서 구하려고 했지만 
+그것은 if 가 너무 많이 나왔다. 
+그래서 처음의 수부터 시작해서 계속 맞춰보는 방법을 채택했다.
+a= int(input())
+# 케이스가 너무 많아진다.
+L=[]
+for i in range(1700):
+    for j in range(1001):
+        if (3*i+5*j)==a:
+            L.append(i+j)
+        else:
+            pass
+if L:
+    print(min(L))
+else:
+    print(-1)
